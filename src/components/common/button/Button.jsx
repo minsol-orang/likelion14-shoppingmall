@@ -1,25 +1,29 @@
 import styled from "styled-components";
 
 const Button  = styled.button`
-  border: none;
-  height: 33px;
-  background-color:#F2F2F2;
+  height : 33px;
+  min-width : 58px;
+  padding : 8px 10px 9px 9px;
+
+  background: #F2F2F2;
+  border-radius: 20px;
   color: #616161;
-  padding : 8px 10px 11px 10px;
   font-family: Pretendard;
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  gap : 5px;
+  text-align: center;
+  border: none;
 
-  display: flex;
-  align-items: center; 
-  justify-content: center;
-  min-width: 58px;
+  display : flex;
+  align-items: center;
+  justify-content : center;
+  gap : 4px;
+
+  cursor: pointer;
+  white-space: nowrap;
 `;
+
 export default Button;
 

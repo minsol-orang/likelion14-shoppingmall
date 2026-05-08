@@ -1,55 +1,57 @@
 import styled from "styled-components";
 
-const Card = styled.div`
-  width: 181px;
-  gap : 5px;
-`;
-
 const ProductImage = styled.img`
-  width: 181px;
-  height: 237px;
-  object-fit: contain;
+	width : 181px;
+	height: 237px;
 `;
 
-const ProductName = styled.div`
-width : 191px;
-height : 13px;
-  margin-top: 12px;
-  color: #333;
+const ProductName = styled.p`
+	color: #333;
+  align-self: stretch;
   font-family: Pretendard;
+  font-size: 11px;
   font-style: normal;
-  font-size: 11px;
   font-weight: 400;
-  white-space: nowrap;
+  line-height: normal;
+	margin : 0;
 `;
 
-const ProductPrice = styled.div`
-  width : 191px;
-  height : 13px;
-  margin-top: 5px;
-  color: #000;
-  font-family: Pretendard;
-  font-size: 12px;
-  font-weight: 700;
-`;
-
-const ProductReview = styled.div`
-  width : 191px;
-  height : 13px;
-  margin-top: 3px;
-  color: #A7A7A7;
+const ProductPrice = styled.p`
+	color: #000;
+  align-self: stretch;
+  -webkit-text-stroke-width: 0.3px;
+  -webkit-text-stroke-color: #000;
   font-family: Pretendard;
   font-size: 11px;
+  font-style: normal;
   font-weight: 400;
+  line-height: normal;
 `;
 
-export default function ProductCard({ image, name, price, review }) {
+const ProductReview = styled.p`
+	align-self: stretch;
+  color: #a7a7a7;
+  font-family: Pretendard;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+`;
+
+const Card = styled.div`
+	display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+`;
+
+export default function ProductCard({ product }) {
   return (
-    <Card>
-      <ProductImage src={image} />
-      <ProductName>{name}</ProductName>
-      <ProductPrice>{price}</ProductPrice>
-      <ProductReview>{review}</ProductReview>
-    </Card>
+		<Card>
+			<ProductImage src={product.image} />
+			<ProductName>{product.name}</ProductName>
+			<ProductPrice>{product.price}</ProductPrice>
+			<ProductReview>{product.review}</ProductReview>
+		</Card>
   );
 }

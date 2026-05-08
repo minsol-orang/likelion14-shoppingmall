@@ -1,33 +1,33 @@
 import styled from "styled-components";
 import Button from "../common/button/Button";
-import downUrl from "../../assets/icons/down_icon.svg";
+import filterDownIcon from "../../assets/icons/filter_down_icon.svg";
 
-const Icon = styled.img`
-  width: 10px;
-  height: 5px;
-`;
+const filterList = ["성별", "색상", "사이즈", "가격대", "종류"];
 
 const Filter = styled.div`
-  width: fit-content;
-  height : 33px;
-  display : flex;
-  gap : 13px;
-  margin-top : 22px;
-  margin-left : 153px;
+	width : 370px;
+	height : 33px;
+	display : flex;
+	gap : 13px;
+	margin-top : 22px;
+	margin-left : 153px;
+	justify-content : space-between;
+`;
 
-
+const Icon = styled.img`
+	width : 10px;
+	height : 5px;
 `;
 
 export default function FilterBar({ openModal }) {
-      return(
-        <>
-          <Filter>
-            <Button onClick={() => openModal("성별")}> 성별 <Icon src={downUrl} /></Button>
-            <Button onClick={() => openModal("색상")}>  색상 <Icon src={downUrl} /></Button>
-            <Button onClick={() => openModal("사이즈")}>사이즈<Icon src={downUrl} /></Button>
-            <Button onClick={() => openModal("가격대")}>가격대<Icon src={downUrl} /></Button>
-            <Button onClick={() => openModal("종류")}>종류<Icon src={downUrl} /></Button>
-          </Filter>
-        </>
-    );
+  return (
+		<Filter>
+			{filterList.map((filterName) => (
+				<Button key={filterName} onClick={() => openModal(filterName)}>
+					{filterName}
+					<Icon src={filterDownIcon}/>
+				</Button>
+			))}
+		</Filter>
+  );
 }

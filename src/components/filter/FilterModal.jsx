@@ -1,132 +1,97 @@
 import styled from "styled-components";
+import closeIcon from "../../assets/icons/close_icon.svg";
 import Button from "../common/button/Button";
-import closeUrl from "../../assets/icons/close_icon.svg";
 
+const modalOption = {
+  성별: [["남성", "여성", "남녀공용"]],
+  색상: [["red", "pink", "blue"], ["black", "gray", "denim"], ["multi", "rainbow", "holographic"]],
+  사이즈: [["9", "10"], ["S", "M", "L", "XL"]],
+  가격대: [["0~30", "31~60", "60~90"]],
+  종류: [["의류", "신발"]],
+};
+
+const Overlay = styled.div`
+  background-color: rgba(125, 125, 125, 0.5);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  //브라우저 화면 기준으로 요소를 고정 후 top, right, bottom, left를 전부 0으로 설정
+  inset : 0; 
+  position: fixed;
+`;
 
 const ModalBox = styled.div`
-min-width: 294px;
-  width: fit-content;
-    background-color: white;
-  padding: 30px 33px 48px 35px;
+  min-height : 156px;
+  min-width : 256px;
+
   border-radius: 25px;
-  border-color : red;
-`;
-
-const Title = styled.div`
-  color: #000;
-  font-size: 16px;
-  font-weight: 600;
-  font-style: normal;
-  font-family: Pretendard;
-`;
-
-const CloseIcon = styled.img`
-  width: 14px;
-  height: 14px;
-  cursor: pointer;
-`;
-
-const Background = styled.div`
-top: 0;
-right: 0;
-bottom: 0;
-left: 0;
-  position: fixed;
-  background: rgba(0, 0, 0, 0.35);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: #FFF;
+  padding-right : 35px;
+  padding-top : 30px;
+  padding-left : 35px;
+  padding-bottom : 48px;
 `;
 
 const ModalHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display : flex;
+  justify-content : space-between;
+  align-items : top;
+
+  padding-bottom : 26px;
+  
 `;
 
-const OptionBox = styled.div`
-  display: ${(props) => {
-    if (props.$type === '사이즈' || props.$type === '색상') {
-      return 'grid';
-    }
-    return 'flex';
-  }};
+const ModalTitle = styled.div`
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  -webkit-text-stroke-width: 0.3px;
+  -webkit-text-stroke-color: #000;
+  line-height: normal;
+  color: black;
 
-  flex-wrap: wrap;
-
-  grid-template-columns: ${(props) => {
-    if (props.$type === '사이즈') return 'repeat(4, auto)';
-    if (props.$type === '색상') return 'repeat(3, auto)';
-    return 'none';
-  }};
-
-  gap: 12px;
-  margin-top: 20px;
-  justify-items: start;
 `;
 
-export default function FilterModal({ type, onClose }) {
-  return (
-    <>
-      <Background>
-        <ModalBox>
-            <ModalHeader>
-                <Title>{type}</Title>
-                <CloseIcon src={closeUrl} onClick={onClose}/>
-            </ModalHeader>
-            <OptionBox $type={type}>
-              {type === "성별" && (
-      <>
-      <Button>남성</Button>
-      <Button>여성</Button>
-      <Button>남녀공용</Button>
-    </>
-  )}
+const CloseButton = styled.img`
+  cursor : pointer;
 
-  {type === "색상" && (
-    <>
-      <Button>red</Button>
-      <Button>pink</Button>
-      <Button>blue</Button>
-      <Button>black</Button>
-      <Button>gray</Button>
-      <Button>denim</Button>
-      <Button>rainbow</Button>
-      <Button>multi</Button>
-      <Button>holographic</Button>
-    </>
-  )}
+  width: 13px;
+  height: 13px;
+`;
 
-  {type === "사이즈" && (
-    <>
-      <Button>9</Button>
-      <Button>10</Button>
-      <div></div>
-      <div></div>
-      <Button>S</Button>
-      <Button>M</Button>
-      <Button>L</Button>
-      <Button>XL</Button>
-    </>
-  )}
+const ModalOption = styled.div`
+  display : flex;
+  flex-direction: column;
+  gap: 10px;
+  
+`;
 
-  {type === "가격대" && (
-    <>
-      <Button>0~30</Button>
-      <Button>31~60</Button>
-      <Button>61~90</Button>
-    </>
-  )}
+const OptionRow = styled.div`
+  display : flex;
+  gap : 14px;
+`;
 
-  {type === "종류" && (
-    <>
-      <Button>의류</Button>
-      <Button>신발</Button>
-    </>
-  )}
-            </OptionBox>
-        </ModalBox>
-      </Background>
-    </>
+export default function FilterModal({modalType, closeModal}) {
+  return(
+    <Overlay onClick={closeModal}>
+      <ModalBox onClick={(e) => e.stopPropagation()}>
+        <ModalHeader>
+          <ModalTitle>{modalType}</ModalTitle>
+          <CloseButton onClick={closeModal} src={closeIcon}></CloseButton>
+        </ModalHeader>
+        <ModalOption>
+          {modalOption[modalType].map((row, rowIndex) => (
+            <OptionRow key={rowIndex}>
+              {row.map((option) => (
+                <Button key={option}>{option}</Button>
+              ))}
+            </OptionRow>
+          ))}
+        </ModalOption>
+      </ModalBox>
+    </Overlay>
   );
 }
