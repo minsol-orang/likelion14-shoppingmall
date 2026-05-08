@@ -11,6 +11,7 @@ export const productDummy = [
     name: "아이앱 스튜디오 25 후드 라이트 그레이",
     price: "145,000원",
     review: "리뷰 1,561",
+    rating: "4.6"
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ export const productDummy = [
     name: "아이앱 스튜디오 25 후드 라이트 블루",
     price: "145,000원",
     review: "리뷰 1,732",
+    rating: "4.6"
   },
   {
     id: 3,
@@ -25,6 +27,7 @@ export const productDummy = [
     name: "아디다스 블랙 져지 2016",
     price: "255,000원",
     review: "리뷰 781",
+    rating: "4.6"
   },
   {
     id: 4,
@@ -32,6 +35,7 @@ export const productDummy = [
     name: "슈프림 후드집업 30 딥블루",
     price: "458,000원",
     review: "리뷰 2,567",
+    rating: "4.6"
   },
   {
     id: 5,
@@ -39,6 +43,7 @@ export const productDummy = [
     name: "나이키 에어 그레이 하운드 25",
     price: "235,000원",
     review: "리뷰 231",
+    rating: "4.6"
   },
 
   {
@@ -47,6 +52,7 @@ export const productDummy = [
     name: "아이앱 스튜디오 25 후드 라이트 그레이",
     price: "145,000원",
     review: "리뷰 1,561",
+    rating: "4.6"
   },
   {
     id: 7,
@@ -54,6 +60,7 @@ export const productDummy = [
     name: "아이앱 스튜디오 25 후드 라이트 블루",
     price: "145,000원",
     review: "리뷰 1,732",
+    rating: "4.6"
   },
   {
     id: 8,
@@ -61,6 +68,7 @@ export const productDummy = [
     name: "아디다스 블랙 져지 2016",
     price: "255,000원",
     review: "리뷰 781",
+    rating: "4.6"
   },
   {
     id: 9,
@@ -68,6 +76,7 @@ export const productDummy = [
     name: "슈프림 후드집업 30 딥블루",
     price: "458,000원",
     review: "리뷰 2,567",
+    rating: "4.6"
   },
   {
     id: 10,
@@ -75,5 +84,6 @@ export const productDummy = [
     name: "나이키 에어 그레이 하운드 25",
     price: "235,000원",
     review: "리뷰 231",
+    rating: "4.6"
   }
 ];
