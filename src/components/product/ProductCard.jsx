@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const ProductImage = styled.img`
 	width : 181px;
@@ -46,8 +47,10 @@ const Card = styled.div`
 `;
 
 export default function ProductCard({ product }) {
+  const navigate = useNavigate();
+  
   return (
-		<Card>
+		<Card onClick={() => navigate(`/item/${product.id}`)}>
 			<ProductImage src={product.image} />
 			<ProductName>{product.name}</ProductName>
 			<ProductPrice>{product.price}</ProductPrice>
