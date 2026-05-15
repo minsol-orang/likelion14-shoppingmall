@@ -1,36 +1,35 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const ProductImage = styled.img`
-	width : 181px;
-	height: 237px;
+  width: 181px;
+  height: 237px;
+  margin-bottom: 5px;
+  object-fit: cover;
 `;
 
 const ProductName = styled.p`
-	color: #333;
+  color: #333;
   align-self: stretch;
   font-family: Pretendard;
   font-size: 11px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-	margin : 0;
 `;
 
 const ProductPrice = styled.p`
-	color: #000;
-  align-self: stretch;
-  -webkit-text-stroke-width: 0.3px;
-  -webkit-text-stroke-color: #000;
+  color: #333;
   font-family: Pretendard;
   font-size: 11px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   line-height: normal;
 `;
 
 const ProductReview = styled.p`
-	align-self: stretch;
-  color: #a7a7a7;
+  align-self: stretch;
+  color: #7a7a7a;
   font-family: Pretendard;
   font-size: 11px;
   font-style: normal;
@@ -39,19 +38,24 @@ const ProductReview = styled.p`
 `;
 
 const Card = styled.div`
-	display: flex;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 5px;
+  cursor: pointer;
 `;
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, categoryType }) {
+  const navigate = useNavigate();
+
   return (
-		<Card>
-			<ProductImage src={product.image} />
-			<ProductName>{product.name}</ProductName>
-			<ProductPrice>{product.price}</ProductPrice>
-			<ProductReview>{product.review}</ProductReview>
-		</Card>
+    <Card onClick={() => navigate(`/item/${categoryType}/${product.id}`)}>
+      <ProductImage src={product.image} alt={product.name} />
+      <ProductName>{product.name}</ProductName>
+      <ProductPrice>
+        {Number(product.price).toLocaleString()}원
+      </ProductPrice>
+      <ProductReview>리뷰 {product.reviews}</ProductReview>
+    </Card>
   );
 }
