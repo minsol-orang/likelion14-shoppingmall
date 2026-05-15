@@ -11,10 +11,10 @@ function App() {
       <Routes>
         <Route element={<RootLayout />}>
           <Route path="/" element={<Main />} />
-          <Route path="/item/:id" element={<ProductDetail />} />
+          <Route path="/item/:type/:id" element={<ProductDetail />} />
           <Route path="/add" element={<AddProduct />} />
-          <Route path="/delete/:id" element={<DeleteProduct />} />
-          <Route path="/edit/:id" element={<EditProduct />} />
+          <Route path="/delete/:type/:id" element={<DeleteProduct />} />
+          <Route path="/edit/:type/:id" element={<EditProduct />} />
         </Route>
       </Routes>
   );

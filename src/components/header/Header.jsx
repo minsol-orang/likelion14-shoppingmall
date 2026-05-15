@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import logoUrl from "../../assets/images/kream_image.png"
-import homeUrl from "../../assets/icons/home_icon.png"
-import {useLocation, useNavigate} from "react-router-dom";
+import logoUrl from "../../assets/images/kream_image.png";
+import homeUrl from "../../assets/icons/home_icon.png";
+import { useLocation, useNavigate } from "react-router-dom";
 
-// 대문자로 시작! -> 대문자를 컨포넌트로 인식하기 때문
 const LogoImage = styled.img`
   width: 166px;
   height: 141px;
@@ -21,16 +20,15 @@ const HeaderContainer = styled.div`
   padding-left: 160px;
   display: flex;
   justify-content: space-between;
-    
 `;
 
 const Button = styled.div`
-  color: #6C6C6C;
+  color: #6c6c6c;
   font-size: 13px;
   font-family: Pretendard;
   font-weight: 400;
   margin-top: 9px;
-	cursor: pointer;
+  cursor: pointer;
 `;
 
 const HeaderRight = styled.div`
@@ -42,56 +40,64 @@ const HeaderRight = styled.div`
 `;
 
 const ButtonGroup = styled.div`
-    display: flex;
-    gap: 28px;
-    margin-top: 9px;
+  display: flex;
+  gap: 28px;
+  margin-top: 9px;
 `;
 
-export default function Header(){
-
-  const {pathname} = useLocation(); // 현재 페이지 경로 불러오기
+export default function Header() {
+  const { pathname } = useLocation();
   const navigate = useNavigate();
-  const buttonName = "상품등록";
-	const productId = pathname.split("/")[2];
 
-  return(
-   <div>
-    	<HeaderContainer>
-        <LogoImage src={logoUrl} onClick={() => navigate("/")}/>
+  const pathParts = pathname.split("/");
+
+  // /item/clothes/3
+  // /edit/clothes/3
+  // /delete/clothes/3
+  const productType = pathParts[2];
+  const productId = pathParts[3];
+
+  const isMainPage = pathname === "/";
+  const isAddPage = pathname.startsWith("/add");
+  const isDetailPage = pathname.startsWith("/item/");
+  const isEditPage = pathname.startsWith("/edit/");
+  const isDeletePage = pathname.startsWith("/delete/");
+
+  const hasProductInfo = productType && productId;
+
+  return (
+    <div>
+      <HeaderContainer>
+        <LogoImage src={logoUrl} onClick={() => navigate("/")} />
+
         <HeaderRight>
-          {pathname === "/" && (
-            <Button onClick={()=>navigate("/add")}>{buttonName}</Button>
+          {isMainPage && (
+            <Button onClick={() => navigate("/add")}>상품등록</Button>
           )}
-          {pathname.startsWith("/item/") && (
-           	<ButtonGroup>
-    					<Button onClick={() => navigate("/add")}>상품등록</Button>
-    					<Button onClick={() => navigate(`/delete/${productId}`)}>상품삭제</Button>
-    					<Button onClick={() => navigate(`/edit/${productId}`)}>상품수정</Button>
-  					</ButtonGroup>
-        	)}
-					{pathname.startsWith("/edit/") && (
-           	<ButtonGroup>
-    					<Button onClick={() => navigate("/add")}>상품등록</Button>
-    					<Button onClick={() => navigate(`/delete/${productId}`)}>상품삭제</Button>
-    					<Button onClick={() => navigate(`/edit/${productId}`)}>상품수정</Button>
-  					</ButtonGroup>
-        	)}
-					{pathname.startsWith("/add") && (
-           	<ButtonGroup>
-    					<Button onClick={() => navigate("/add")}>상품등록</Button>
-  					</ButtonGroup>
-        	)}
-					{pathname.startsWith("/delete/") && (
-           	<ButtonGroup>
-    					<Button onClick={() => navigate("/add")}>상품등록</Button>
-    					<Button onClick={() => navigate(`/delete/${productId}`)}>상품삭제</Button>
-    					<Button onClick={() => navigate(`/edit/${productId}`)}>상품수정</Button>
-  					</ButtonGroup>
-        	)}
+
+          {(isDetailPage || isEditPage || isDeletePage) && hasProductInfo && (
+            <ButtonGroup>
+              <Button onClick={() => navigate("/add")}>상품등록</Button>
+
+              <Button onClick={() => navigate(`/delete/${productType}/${productId}`)}>
+                상품삭제
+              </Button>
+
+              <Button onClick={() => navigate(`/edit/${productType}/${productId}`)}>
+                상품수정
+              </Button>
+            </ButtonGroup>
+          )}
+
+          {isAddPage && (
+            <ButtonGroup>
+              <Button onClick={() => navigate("/add")}>상품등록</Button>
+            </ButtonGroup>
+          )}
+
           <HomeIcon src={homeUrl} onClick={() => navigate("/")} />
         </HeaderRight>
       </HeaderContainer>
-  </div>
-    );
+    </div>
+  );
 }
-
